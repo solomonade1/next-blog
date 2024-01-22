@@ -1,24 +1,31 @@
 /* eslint-disable @next/next/no-async-client-component */
-"use client"
+ "use client"
 import React from 'react'
 import styles from "./page.module.css"
 import Button from "@/components/Button/Button"
 import Image from "next/image"
 import Link from "next/link"
+import useSWR from "swr";
 
-async function getData() {
-  const authUrl = process.env.NEXT_PUBLIC_NEXTAUTH_URL;
-  const res = await fetch(`${authUrl}/api/posts`, {
-    cache: "no-store"
-  })
 
-  if (!res.ok) {
 
-    throw new Error('Failed to fetch data')
-  }
+const authUrl = process.env.NEXT_PUBLIC_NEXTAUTH_URL;
+// async function getData() {
+//   const res = await fetch(`${authUrl}/api/posts`, {
+//     cache: "no-store"
+//   })
 
-  return res.json()
-}
+//   if (!res.ok) {
+
+//     throw new Error('Failed to fetch data')
+//   }
+
+//   return res.json()
+
+// }
+
+ 
+
 const truncateContent = (content, maxLength) => {
   if (content.length > maxLength) {
     return content.substring(0, maxLength) + "...";
@@ -26,14 +33,21 @@ const truncateContent = (content, maxLength) => {
   return content;
 };
 
-const Blog = async ({ params }) => {
-  const blogData = await getData()
+const Blog = ({ params }) => {
+
+  const fetcher = (...args) => fetch(...args).then(res => res.json())
+
+  const { data, mutate, error, isLoading } = useSWR(`${authUrl}/api/posts`, fetcher)
+   console.log("post", data)
+
+
+
+ //  const blogData = await getData()
   return (
     <div className={styles.mainContainer}>
 
-
-      {
-        blogData.map(item => (
+      {isLoading ? "Loading..." :
+        data.map(item => (
           <div href={`/blog/${item._id}`} key={item._id} className={styles.container}>
             <h1 className={styles.catTitle}> {params.title} </h1>
             <div className={styles.item} >
