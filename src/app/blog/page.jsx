@@ -37,7 +37,7 @@ const Blog = ({ params }) => {
 
   const fetcher = (...args) => fetch(...args).then(res => res.json())
 
-  const { data, mutate, error, isLoading } = useSWR(`${authUrl}/api/posts`, fetcher)
+  const { data, mutate, error, isLoading } = useSWR(`api/posts`, fetcher)
    console.log("post", data)
 
 

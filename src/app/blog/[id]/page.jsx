@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 
 async function getData(id ) {
   const authUrl = process.env.NEXT_PUBLIC_NEXTAUTH_URL;
-  const res = await fetch(`${authUrl}/api/posts/${id}`, {
+  const res = await fetch(`api/posts/${id}`, {
     cache: "no-store"
   })
 
