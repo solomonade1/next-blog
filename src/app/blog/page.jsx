@@ -60,7 +60,7 @@ const Blog = ({ params }) => {
                 {/* <Button text="See More" url={`/blog/${item._id}`} /> */}
               </div>
               <div className={styles.imgContainer} >
-                <Image className={styles.img} fill={true} sizes="100%" priority={true} src={`https://images.pexels.com/photos/3130810/pexels-photo-3130810.jpeg`}
+                <Image className={styles.img} fill={true} sizes="100%" priority={true} src={item.img || `https://images.pexels.com/photos/3130810/pexels-photo-3130810.jpeg`}
                   alt="" />
               </div>
             </div>
