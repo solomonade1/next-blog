@@ -5,7 +5,8 @@ import { notFound } from "next/navigation";
 
 
 async function getData(id ) {
-  const res = await fetch(`http://localhost:3000/api/posts/${id}`, {
+  const authUrl = process.env.NEXT_PUBLIC_NEXTAUTH_URL;
+  const res = await fetch(`${authUrl}/api/posts/${id}`, {
     cache: "no-store"
   })
 
@@ -48,13 +49,13 @@ const BlogPost = async ({ params }) => {
               height={40}
               className={styles.avatar}
             />
-            <span className={styles.username}> {data.usernamee} </span>
+            <span className={styles.username}> {data.username} </span>
           </div>
         </div>
         <div className={styles.imageContainer}>
           <Image
             src={data.img}
-            alt=""
+            alt={data.title}
             fill={true}
             className={styles.image}
           />
