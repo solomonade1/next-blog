@@ -49,6 +49,7 @@ const Login = () => {
       </form>
       <button onClick={() => signIn("google")
       }>Login with Google</button>
+       {/* <button >Login with Google</button> */}
     </div>
   )
 }

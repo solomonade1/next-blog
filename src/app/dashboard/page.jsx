@@ -6,6 +6,7 @@ import styles from "./page.module.css"
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import BlogForm from "@/components/blogForm/BlogForm";
 
 const Dashboard = () => {
 
@@ -43,7 +44,7 @@ const Dashboard = () => {
   const fetcher = (...args) => fetch(...args).then(res => res.json())
 
   const { data, mutate, error, isLoading } = useSWR(`/api/posts?username=${session?.data?.user.name}`, fetcher)
-  console.log("post", data)
+  // console.log("post", data)
 
 
 
@@ -56,8 +57,7 @@ const Dashboard = () => {
   }
 
 
-  console.log(session)
-
+  // console.log(session)
   const handleSubmit = async (e) => {
     e.preventDefault();
     const title = e.target[0].value;
@@ -85,7 +85,7 @@ const Dashboard = () => {
 
   const handleDelete = async (id) => {
     try {
-      console.log("IDDD", id)
+     // console.log("IDDD", id)
       await fetch(`/api/posts/${id}`, {
         method: "DELETE",
       });
@@ -106,26 +106,14 @@ const Dashboard = () => {
                 <Image src={post.img} width={200} height={100} alt="" />
               </div>
               <h2 className={styles.postTitle}> {post.title} </h2>
-              <span className={styles.delete} 
-              onClick={() => handleDelete(post._id)}
+              <span className={styles.delete}
+                onClick={() => handleDelete(post._id)}
               >X</span>
             </div>
           ))
         }
       </div>
-      <form className={styles.new} onSubmit={handleSubmit}>
-        <h1>Add New Post</h1>
-        <input type="text" placeholder="Title" className={styles.input} />
-        <input type="text" placeholder="Desc" className={styles.input} />
-        <input type="text" placeholder="Image" className={styles.input} />
-        <textarea
-          placeholder="Content"
-          className={styles.textArea}
-          cols="30"
-          rows="10"
-        ></textarea>
-        <button className={styles.button}>Send</button>
-      </form>
+     <BlogForm />
     </div>
   }
 
