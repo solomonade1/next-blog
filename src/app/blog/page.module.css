@@ -45,3 +45,12 @@ font-size: 50px;
 font-size: 20px;
 }
 
+.seeMore {
+    padding: 20px;
+    cursor: pointer;
+    background-color: #53c28b;
+    border: none;
+    border-radius: 5px;
+    width: max-content;
+    color: white;
+}

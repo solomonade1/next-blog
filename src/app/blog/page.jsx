@@ -28,20 +28,23 @@ const Blog = async ({ params }) => {
 
       {
         blogData.map(item => (
-          <Link href={`/blog/${item._id}`} key={item._id} className={styles.container}>
+          <div href={`/blog/${item._id}`} key={item._id} className={styles.container}>
             <h1 className={styles.catTitle}> {params.title} </h1>
             <div className={styles.item} >
               <div className={styles.content} >
                 <h1 className={styles.title}>{item.desc} </h1>
                 <p className={styles.desc}>{item.content}</p>
-                <Button text="See More" url="#" />
+                <Link href={`/blog/${item._id}`} className={styles.seeMore}>
+                  See More
+                </Link>
+                {/* <Button text="See More" url={`/blog/${item._id}`} /> */}
               </div>
               <div className={styles.imgContainer} >
                 <Image className={styles.img} fill={true} src={item.img || `https://images.pexels.com/photos/3130810/pexels-photo-3130810.jpeg`}
                   alt="" />
               </div>
             </div>
-          </Link>
+          </div>
         ))
       }
 
