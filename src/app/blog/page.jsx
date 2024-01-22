@@ -19,6 +19,12 @@ async function getData() {
 
   return res.json()
 }
+const truncateContent = (content, maxLength) => {
+  if (content.length > maxLength) {
+    return content.substring(0, maxLength) + "...";
+  }
+  return content;
+};
 
 const Blog = async ({ params }) => {
   const blogData = await getData()
@@ -32,15 +38,15 @@ const Blog = async ({ params }) => {
             <h1 className={styles.catTitle}> {params.title} </h1>
             <div className={styles.item} >
               <div className={styles.content} >
-                <h1 className={styles.title}>{item.desc} </h1>
-                <p className={styles.desc}>{item.content}</p>
+                <h1 className={styles.title}>{item.title} </h1>
+                <p className={styles.desc}>{truncateContent(item.content, 120)}</p>
                 <Link href={`/blog/${item._id}`} className={styles.seeMore}>
                   See More
                 </Link>
                 {/* <Button text="See More" url={`/blog/${item._id}`} /> */}
               </div>
               <div className={styles.imgContainer} >
-                <Image className={styles.img} fill={true} src={item.img || `https://images.pexels.com/photos/3130810/pexels-photo-3130810.jpeg`}
+                <Image className={styles.img} fill={true} sizes="100%" priority={true} src={`https://images.pexels.com/photos/3130810/pexels-photo-3130810.jpeg`}
                   alt="" />
               </div>
             </div>
