@@ -7,7 +7,8 @@ import Image from "next/image"
 import Link from "next/link"
 
 async function getData() {
-  const res = await fetch('http://localhost:3000/api/posts', {
+  const authUrl = process.env.NEXT_PUBLIC_NEXTAUTH_URL;
+  const res = await fetch(`${authUrl}/api/posts`, {
     cache: "no-store"
   })
 
