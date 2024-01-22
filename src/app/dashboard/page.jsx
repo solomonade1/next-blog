@@ -39,12 +39,16 @@ const Dashboard = () => {
 
   const session = useSession()
 
-  const router = useRouter()
+  const router = useRouter();
+  const authUrl = process.env.NEXT_PUBLIC_NEXTAUTH_URL;
 
+
+  console.log("ENVVV => ", process.env.NEXT_PUBLIC_NEXTAUTH_URL)
   const fetcher = (...args) => fetch(...args).then(res => res.json())
 
-  const { data, mutate, error, isLoading } = useSWR(`/api/posts?username=${session?.data?.user.name}`, fetcher)
-  // console.log("post", data)
+  const { data, mutate, error, isLoading } = useSWR(`${authUrl}/api/posts?username=${session?.data?.user.name}`, fetcher)
+   console.log("post", data)
+
 
 
 
@@ -66,7 +70,7 @@ const Dashboard = () => {
     const content = e.target[3].value;
 
     try {
-      await fetch("/api/posts", {
+      await fetch(`${authUrl}/api/posts`, {
         method: "POST",
         body: JSON.stringify({
           title,
@@ -86,7 +90,7 @@ const Dashboard = () => {
   const handleDelete = async (id) => {
     try {
      // console.log("IDDD", id)
-      await fetch(`/api/posts/${id}`, {
+      await fetch(`${authUrl}/api/posts/${id}`, {
         method: "DELETE",
       });
       mutate();

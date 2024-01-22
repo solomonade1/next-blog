@@ -17,7 +17,7 @@ const BlogForm = () => {
     const content = e.target[3].value;
 
     try {
-      await fetch("/api/posts", {
+      await fetch("http://localhost:3000/api/posts", {
         method: "POST",
         body: JSON.stringify({
           title,
