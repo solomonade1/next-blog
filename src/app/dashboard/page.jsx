@@ -43,11 +43,11 @@ const Dashboard = () => {
   const authUrl = process.env.NEXT_PUBLIC_NEXTAUTH_URL;
 
 
-  console.log("ENVVV => ", process.env.NEXT_PUBLIC_NEXTAUTH_URL)
+ // console.log("ENVVV => ", process.env.NEXT_PUBLIC_NEXTAUTH_URL)
   const fetcher = (...args) => fetch(...args).then(res => res.json())
 
   const { data, mutate, error, isLoading } = useSWR(`api/posts?username=${session?.data?.user.name}`, fetcher)
-   console.log("post", data)
+   // console.log("post", data)
 
 
 

@@ -4,32 +4,31 @@ import styles from "./page.module.css"
 import { notFound } from "next/navigation";
 
 
-async function getData(id ) {
+async function getData(id) {
   const authUrl = process.env.NEXT_PUBLIC_NEXTAUTH_URL;
-  const res = await fetch(`api/posts/${id}`, {
-    cache: "no-store"
-  })
+  const res = await fetch(`${authUrl}/api/posts/${id}`, {
+    cache: "no-store",
+  });
 
   if (!res.ok) {
-
-     return notFound()
+    return notFound()
   }
 
-  return res.json()
+  return res.json();
 }
 
 
-export async function generateMetadata({ params }) {
+// export async function generateMetadata({ params }) {
 
-  const post = await getData(params.id)
+//   const post = await getData(params.id)
   
  
 
-  return {
-    title: post.title,
-    description: post.desc
-  }
-}
+//   return {
+//     title: post.title,
+//     description: post.desc
+//   }
+// }
 
 const BlogPost = async ({ params }) => {
   const data = await getData(params.id)
