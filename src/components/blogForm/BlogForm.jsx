@@ -17,7 +17,9 @@ const BlogForm = () => {
     const content = e.target[3].value;
 
     try {
-      await fetch("http://localhost:3000/api/posts", {
+      const authUrl = process.env.NEXT_PUBLIC_NEXTAUTH_URL;
+
+      await fetch(`${authUrl}/api/posts`, {
         method: "POST",
         body: JSON.stringify({
           title,
